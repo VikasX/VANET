@@ -1,0 +1,32 @@
+create table membr_name(
+user_id char(8) not null primary key unique,
+user_name varchar(35) not null ,
+user_email varchar(44) not null,
+user_phone int(11) not null,
+admin_id char(8) not null ,
+foreign key (admin_id) references admini(admin_id));
+
+create table admini(
+admin_id char(8) primary key not null unique,
+admin_name varchar(44) not null,
+admin_pass varchar(44) not null,
+admin_email varchar(44) not null,
+admin_phone int(11) not null);
+
+create table membr_pass(
+mem_id char(8) not null,
+mem_pass varchar(44) not null primary key,
+mem_pass2 varchar(44) not null ,
+foreign key (mem_id) references membr_name(user_id));
+
+create table log(
+login_id char(8) not null,
+login_pass varchar(44) not null,
+foreign key (login_id) references membr_name(user_id),
+foreign key (login_pass) references membr_pass(mem_pass));
+
+create table messages(
+msg_id int(2) not null auto_increment primary key,
+msg_place_x int(3) not null,
+msg_place_y int(3) not null,
+msg_type varchar(25));
